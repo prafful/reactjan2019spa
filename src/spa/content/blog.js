@@ -11,6 +11,9 @@ class Blog extends React.Component {
         this.state = {
             products:[]
         }
+
+        this.getProducts = this.getProducts.bind(this)
+        this.deleteCurrentProduct = this.deleteCurrentProduct.bind(this)
     }
     
 
@@ -28,6 +31,11 @@ class Blog extends React.Component {
 
     deleteCurrentProduct(id){
         console.log(id)
+        axios.delete("http://localhost:3000/products/" + id)
+            .then((response)=>{
+                console.log(response)
+                this.getProducts()
+            })
     }
 
     displayProducts(){
