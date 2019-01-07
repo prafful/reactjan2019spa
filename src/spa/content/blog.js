@@ -26,6 +26,10 @@ class Blog extends React.Component {
             })
     }
 
+    deleteCurrentProduct(id){
+        console.log(id)
+    }
+
     displayProducts(){
         return this.state.products.map((p)=>{
             return (
@@ -36,6 +40,7 @@ class Blog extends React.Component {
                     up={p.upvote}
                     down={p.downvote}
                     desc={p.description}
+                    deleteMe={this.deleteCurrentProduct}
                 ></Product>
             )
         })
@@ -53,6 +58,7 @@ class Blog extends React.Component {
                                 <th>Description</th>
                                 <th>+</th>
                                 <th>-</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
