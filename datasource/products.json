@@ -13,6 +13,13 @@
       "upvote": 60,
       "downvote": 10,
       "description": "Modern ancestor of devices!"
+    },
+    {
+      "name": "japan",
+      "upvote": "15",
+      "downvote": "-1",
+      "description": "the land of rising sun",
+      "id": 3
     }
   ]
 }

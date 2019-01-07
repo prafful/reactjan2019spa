@@ -9,11 +9,20 @@ class Blog extends React.Component {
     constructor(props){
         super(props)
         this.state = {
-            products:[]
+            products:[],
+            name:"",
+            description:"",
+            upvote:0,
+            downvote:0
         }
 
         this.getProducts = this.getProducts.bind(this)
         this.deleteCurrentProduct = this.deleteCurrentProduct.bind(this)
+        this.getName = this.getName.bind(this)
+        this.getDesc = this.getDesc.bind(this)
+        this.getUp = this.getUp.bind(this)
+        this.getDown = this.getDown.bind(this)
+        this.addProduct = this.addProduct.bind(this)
     }
     
 
@@ -54,6 +63,51 @@ class Blog extends React.Component {
         })
     }
 
+    addProduct(){
+        console.log("addProduct called!!!!  ")
+        var jsonproduct = {
+            "name":this.state.name,
+            "upvote": this.state.upvote,
+            "downvote": this.state.downvote,
+            "description":this.state.description
+        }
+        console.log(jsonproduct)
+        axios.post("http://localhost:3000/products", jsonproduct)
+            .then((rd)=>{
+                console.log(rd)
+                this.getProducts()
+            })
+        this.setState({ name:"",
+                        description:"",
+                        upvote:0,
+                        downvote:0
+                    })
+
+        console.log(this.props.match)            
+
+            
+    }
+
+    getName(event){
+        console.log(event.target.value)
+        this.setState({name: event.target.value})
+    }
+
+    getDesc(event){
+        console.log(event.target.value)
+        this.setState({description: event.target.value})
+    }
+
+    getUp(event){
+        console.log(event.target.value)
+        this.setState({upvote: event.target.value})
+    }
+
+    getDown(event){
+        console.log(event.target.value)
+        this.setState({downvote: event.target.value})
+    }
+
     render() { 
         return (
             <div>  
@@ -73,6 +127,15 @@ class Blog extends React.Component {
                             {this.displayProducts()}                        
                         </tbody>
                     </table>
+                    <hr></hr>
+                    <br></br>
+                    <div>
+                        Name: <input type="text" onChange={this.getName} value={this.state.name}></input> <br></br>
+                        Description: <input type="text" onChange={this.getDesc} value={this.state.description} ></input> <br></br>
+                        Upvote: <input type="number" onChange={this.getUp} value={this.state.upvote}></input><br></br>
+                        Downvote: <input type="number" onChange={this.getDown} value={this.state.downvote}></input><br></br>
+                        <button onClick={this.addProduct}>Add</button>
+                </div>
                 </div>
             </div>
         );
